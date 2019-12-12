@@ -43,5 +43,11 @@ public class ProductResource {
         // }
         
     }
+     
+    @RequestMapping(value = "/produtos/{id}",
+    method = RequestMethod.DELETE)
+    public void removerProduto(@PathVariable Integer id) {
+        this.produtos.remove(id - 1);
+    }
 
 }

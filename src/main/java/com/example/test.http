@@ -8,3 +8,7 @@ GET http://localhost:5000/produtos/?raca=cao HTTP/1.1
 ###
 
 GET http://localhost:5000/produtos/3/ HTTP/1.1
+
+###
+
+DELETE http://localhost:5000/produtos/2/ HTTP/1.1
