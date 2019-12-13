@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,10 +45,27 @@ public class ProductResource {
         
     }
      
-    @RequestMapping(value = "/produtos/{id}",
-    method = RequestMethod.DELETE)
+    @RequestMapping(value = "/produtos/{id}",method = RequestMethod.DELETE)
     public void removerProduto(@PathVariable Integer id) {
         this.produtos.remove(id - 1);
     }
+
+    @RequestMapping(value = "/produtos/", method = RequestMethod.POST)
+    public Product criarProduto(@RequestBody Product product) {
+        String raca = product.getRaca();
+        double valor = product.getValor();
+        int quantidade = (int) product.getQuantidade();
+        return new Product(raca, valor, quantidade);
+    }
+
+    @RequestMapping(value ="/produtos/{id}", method=RequestMethod.PUT)
+    public void requestMethodName(@PathVariable Integer id,
+    @RequestBody Product produtoParam) {
+        Product produto = this.produtos.get(id - 1);
+        produto.setQuantidade(produtoParam.getQuantidade());
+        produto.setValor(produtoParam.getValor());
+        produto.setRaca(produtoParam.getRaca());
+    }
+    
 
 }
